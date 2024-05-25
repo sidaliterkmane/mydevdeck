@@ -11,7 +11,7 @@ const CheckoutButton = () => {
     setLoading(true);
     const stripePromise = await loadStripe(testPublicStripeKey);
     try {
-      const response = await fetch("http://localhost:3000/create-checkout-session", {
+      const response = await fetch("http://localhost:3000/api/payment/create-checkout-session", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
