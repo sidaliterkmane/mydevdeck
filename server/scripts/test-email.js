@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const mongoose = require("mongoose");
 const sendRegistrationEmail = require("../config/mail");
 const connectDB = require("../config/db");
@@ -12,7 +13,7 @@ const testEmail = async () => {
     await connectDB();
 
     // Test email address
-    const email = "contact@sidaliterkmane.com";
+    const email = "sidterkmane@hotmail.com";
 
     // Send registration email
     await sendRegistrationEmail(email);

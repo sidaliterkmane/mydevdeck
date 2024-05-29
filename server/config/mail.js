@@ -1,4 +1,3 @@
-require("dotenv").config();
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
@@ -10,8 +9,8 @@ const UserModel = require("../models/user");
 const transporter = nodemailer.createTransport({
   service: "hotmail",
   auth: {
-    user: "sidterkmane@hotmail.com",
-    pass: "Yasmine130101",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 

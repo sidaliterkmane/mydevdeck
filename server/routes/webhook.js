@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require("body-parser");
 const { stripeTest } = require("../config/stripe");
 const sendRegistrationEmail = require("../config/mail");
 
@@ -8,14 +7,13 @@ const sendRegistrationEmail = require("../config/mail");
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 // Route to handle Stripe webhook events
-router.post("/webhook-onetime-payment", bodyParser.raw({ type: "application/json" }), async (req, res) => {
-  const payload = req.body; // Raw body of the webhook event
+router.post("/webhook-onetime-payment", async (req, res) => {
   const sig = req.headers["stripe-signature"]; // Signature header from Stripe
   let event;
 
   try {
     // Verify the event using Stripe's SDK
-    event = stripeTest.webhooks.constructEvent(payload, sig, endpointSecret);
+    event = stripeTest.webhooks.constructEvent(req.body, sig, endpointSecret);
     console.log("Webhook verified successfully");
   } catch (err) {
     console.error(`Webhook Error: ${err.message}`);
@@ -29,7 +27,6 @@ router.post("/webhook-onetime-payment", bodyParser.raw({ type: "application/json
 
     try {
       const sessionDetails = await stripeTest.checkout.sessions.retrieve(session.id, { expand: ["line_items", "customer"] });
-
       const customerDetails = sessionDetails.customer_details;
       console.log("Session details retrieved successfully:", sessionDetails);
 
@@ -37,7 +34,7 @@ router.post("/webhook-onetime-payment", bodyParser.raw({ type: "application/json
         // Log success message and send magic link email if payment is successful
         console.log("Payment status is 'paid' for customer:", customerDetails.email);
         console.log("Sending email to:", customerDetails.email);
-        sendRegistrationEmail(customerDetails.email);
+        await sendRegistrationEmail(customerDetails.email);
       }
     } catch (error) {
       console.error("Error retrieving session details or sending email:", error);
