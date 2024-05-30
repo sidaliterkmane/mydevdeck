@@ -39,6 +39,9 @@ app.use(express.json());
 // Routes for payment-related endpoints
 app.use("/api/payment", require("./routes/payment"));
 
+// Routes for user authentication
+app.use("/auth", require('./routes/auth'))
+
 // Start the server and listen on the specified port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
