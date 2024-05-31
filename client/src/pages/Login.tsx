@@ -16,13 +16,23 @@ const Login = () => {
             Email Address
           </label>
           <input
+            placeholder="mydevdeck@gmail.com"
             type="text"
-            className="p-2 text-neutral-100 text-sm font-light rounded-lg h-[40px] bg-neutral-800 border border-neutral-700 focus:border-2 focus:border-neutral-700"
+            className="p-2 text-neutral-100 text-sm font-light rounded-lg h-[40px] bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-2 focus:border-neutral-600 placeholder:opacity-50"
+          />
+
+          <label htmlFor="" className="font-light text-sm mb-1 mt-3">
+            Password
+          </label>
+          <input
+            placeholder="********"
+            type="password"
+            className="p-2 text-neutral-100 text-sm font-light rounded-lg h-[40px] bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-2 focus:border-neutral-600 placeholder:opacity-50"
           />
 
           <button
             type="submit"
-            className="w-full h-[40px] rounded-lg border border-neutral-800 bg-neutral-900 pl-4 text-sm text-neutral-300 transition hover:brightness-105 mt-4"
+            className="w-full h-[40px] rounded-lg border border-neutral-800 bg-neutral-900 pl-4 text-sm text-neutral-300 transition hover:brightness-105 mt-8"
           >
             Login →
           </button>

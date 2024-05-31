@@ -3,7 +3,7 @@ import CheckoutButton from "./components/CheckoutButton";
 
 const Landing = () => {
   return (
-    <div className="landing">
+    <div className="landing w-screen h-screen flex justify-center items-center">
       <CheckoutButton />
     </div>
   )

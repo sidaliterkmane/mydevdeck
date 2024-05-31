@@ -49,6 +49,12 @@ h1, h2, h3, h4, h5, h6, p, button, label {
     line-height: 1.625;
 }
 
-input {
-    
+.icon {
+    transition: 0.2s ease;
+}
+
+.checkout-button:hover .icon{
+    width: 28px;
+    height: 28px;
+    transform: rotate(-5deg);
 }
