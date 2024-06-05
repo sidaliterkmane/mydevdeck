@@ -54,7 +54,5 @@ h1, h2, h3, h4, h5, h6, p, button, label {
 }
 
 .checkout-button:hover .icon{
-    width: 28px;
-    height: 28px;
-    transform: rotate(-5deg);
+    transform: rotate(-5deg) scale(1.1);
 }

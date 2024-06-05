@@ -53,8 +53,8 @@ const CheckoutButton = () => {
         checkout-button
         w-[300px] 
         h-[50px]
-        bg-[#1100ff] 
-        px-16 
+        px-16
+        border border-neutral-800 bg-neutral-900
         rounded-lg 
         font-semibold 
         text-sm 
@@ -62,11 +62,24 @@ const CheckoutButton = () => {
         flex
         gap-2
         justify-center
-        items-center hover:brightness-95
+        items-center hover:brightness-105
       "
     >
-      <div className="w-[30px] flex justify-center items-center">{deckIcon}</div>
-      {loading ? "Processing..." : "Get your DevDeck"}
+      {loading ? (
+        <div
+          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+          role="status"
+        >
+          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+            Loading...
+          </span>
+        </div>
+      ) : (
+        <div className="flex gap-2 justify-center items-center">
+          <div className="flex justify-center items-center">{deckIcon}</div>
+          <p className="">Get your DevDeck</p>
+        </div>
+      )}
     </button>
   );
 };

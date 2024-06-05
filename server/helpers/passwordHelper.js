@@ -9,7 +9,7 @@ const crypto = require("crypto");
 const generateTemporaryPassword = (length = 12) => {
   // Character set including uppercase, lowercase letters, digits, and special characters
   const charset =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&?";
   let password = "";
 
   const randomBytes = crypto.randomBytes(length);

@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 // Login Endpoint
 const loginUser = async (req, res) => {
   try {
-    const { email, password, newPassword } = req.body;
+    const { email, password } = req.body;
 
     // Check if user exists
     const user = await User.findOne({ email });
@@ -50,17 +50,41 @@ const getProfile = (req, res) => {
   const { token } = req.cookies;
 
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
       if (err) throw err;
-      res.json(user);
+      const foundUser = await User.findById(user.id).select('-password');
+      res.json(foundUser);
     });
   } else {
     res.json(null);
   }
 };
 
+const changePassword = async (req, res) => {
+  try {
+    const { password } = req.body
+    const { token } = req.cookies;
+
+    if (!token) {
+      return res.status(401).json({ error: "Unauthorized "})
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
+      if (err) throw err;
+
+      const hashedPassword = await hashPassword(password);
+      await User.findByIdAndUpdate(user.id, { password: hashedPassword, completedRegistration: true });
+      res.json({ success: true})
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 module.exports = {
   loginUser,
   logoutUser,
   getProfile,
+  changePassword
 };
