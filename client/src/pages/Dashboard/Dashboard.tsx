@@ -28,7 +28,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await axios.get("/auth/logout");
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
       setUser(null);
       toast.success("You have successfully logged out.");
       navigate("/login");
